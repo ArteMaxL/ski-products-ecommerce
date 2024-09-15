@@ -70,19 +70,19 @@ public class ProductsController(IGenericRepository<Product> repository) : Contro
     }
 
     [HttpGet("brands")]
-    public ActionResult<IReadOnlyList<string>> GetBrands()
+    public async Task<ActionResult<IReadOnlyList<string>>> GetBrands()
     {
-        // TODO: Implement method
+        var spec = new BrandListSpecification();
 
-        return Ok();
+        return Ok(await repository.ListWithSpecAsync(spec));
     }
 
     [HttpGet("types")]
-    public ActionResult<IReadOnlyList<string>> GetTypes()
+    public async Task<ActionResult<IReadOnlyList<string>>> GetTypes()
     {
-        // TODO: Implement method
+        var spec = new TypeListSpecification();
 
-        return Ok();
+        return Ok(await repository.ListWithSpecAsync(spec));
     }
 
     private bool ProductExists(Guid id)
